@@ -1,3 +1,5 @@
+import 'package:english/Recources/EnumColors.dart';
+import 'package:english/Recources/EnumFont.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,10 +14,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      theme: ThemeData(),
+      home: const MyHomePage(title: 'Неправильные глаголы'),
     );
   }
 }
@@ -42,7 +42,12 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(
+          widget.title,
+          style: TextStyleExtension.generateSemibold(size: 23),
+        ),
+        backgroundColor: EnumColors.white.color(),
+        shadowColor: EnumColors.clear.color(),
       ),
       body: Center(
         child: Column(
