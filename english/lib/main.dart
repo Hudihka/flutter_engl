@@ -49,7 +49,9 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: EnumColors.white.color(),
         shadowColor: EnumColors.clear.color(),
       ),
-      body: Center(
+      body: Container(
+        width: double.infinity,
+        color: EnumColors.white.color(),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
