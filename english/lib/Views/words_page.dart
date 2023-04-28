@@ -3,6 +3,7 @@ import 'package:english/Recources/enum_all_texts.dart';
 import 'package:english/Recources/enum_font.dart';
 import 'package:english/Recources/enum_offsets.dart';
 import 'package:english/Views/segment_control.dart';
+import 'package:english/Views/list_words.dart';
 import 'package:english/Views/switch_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -52,20 +53,9 @@ class _WordsPageState extends State<WordsPage> {
             SizedBox(
               height: EnumOffsets.offset16.offset(),
             ),
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
+            const ListWords(),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }
