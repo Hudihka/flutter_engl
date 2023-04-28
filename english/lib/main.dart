@@ -1,6 +1,7 @@
 import 'package:english/Recources/enum_colors.dart';
 import 'package:english/Recources/enum_all_texts.dart';
 import 'package:english/Recources/enum_font.dart';
+import 'package:english/Recources/enum_offsets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -59,7 +60,17 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            SizedBox(
+              height: EnumOffsets.offset16.offset(),
+            ),
             _segmentControl(),
+            SizedBox(
+              height: EnumOffsets.offset16.offset(),
+            ),
+            _switch(),
+            SizedBox(
+              height: EnumOffsets.offset16.offset(),
+            ),
             const Text(
               'You have pushed the button this many times:',
             ),
@@ -82,26 +93,31 @@ class _MyHomePageState extends State<MyHomePage> {
     return Container(
       width: double.infinity,
       child: Padding(
-        padding: EdgeInsets.only(top: 16, left: 16, right: 16),
+        padding:
+            EdgeInsets.symmetric(horizontal: EnumOffsets.offset16.offset()),
         child: CupertinoSlidingSegmentedControl<int>(
             backgroundColor: EnumColors.white.color(),
             thumbColor: EnumColors.black.color(),
             groupValue: 0,
             children: {
               0: Padding(
-                padding: EdgeInsets.all(6),
+                padding: EdgeInsets.all(EnumOffsets.offset6.offset()),
                 child: Text(
                   EnumTexts.all.getText(),
                   style: TextStyleExtension.generate(
-                      color: EnumColors.white, size: 20),
+                      style: EnumFontStyle.semiBold,
+                      color: EnumColors.white,
+                      size: 20),
                 ),
               ),
               1: Padding(
-                padding: EdgeInsets.all(6),
+                padding: EdgeInsets.all(EnumOffsets.offset6.offset()),
                 child: Text(
                   EnumTexts.favorit.getText(),
                   style: TextStyleExtension.generate(
-                      color: EnumColors.black, size: 20),
+                      style: EnumFontStyle.semiBold,
+                      color: EnumColors.black,
+                      size: 20),
                 ),
               )
             },
@@ -110,6 +126,36 @@ class _MyHomePageState extends State<MyHomePage> {
                 // groupValue = value;
               });
             }),
+      ),
+    );
+  }
+
+  Widget _switch() {
+    return Container(
+      width: double.infinity,
+      child: Padding(
+        padding:
+            EdgeInsets.symmetric(horizontal: EnumOffsets.offset16.offset()),
+        child: Row(
+          children: [
+            CupertinoSwitch(
+              value: true,
+              activeColor: EnumColors.black.color(),
+              onChanged: (bool? value) {
+                setState(() {
+                  // switchValue = value ?? false;
+                });
+              },
+            ),
+            SizedBox(
+              width: EnumOffsets.offset16.offset(),
+            ),
+            Text(
+              EnumTexts.hideTranslate.getText(),
+              style: TextStyleExtension.generateSemibold(size: 20),
+            )
+          ],
+        ),
       ),
     );
   }
