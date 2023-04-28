@@ -1,4 +1,5 @@
 import 'package:english/Recources/EnumColors.dart';
+import 'package:english/Recources/EnumTexts.dart';
 import 'package:english/Recources/EnumFont.dart';
 import 'package:flutter/material.dart';
 
@@ -15,15 +16,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(),
-      home: const MyHomePage(title: 'Неправильные глаголы'),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+  const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -43,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          widget.title,
+          EnumTexts.titleText.getText(),
           style: TextStyleExtension.generateSemibold(size: 23),
         ),
         backgroundColor: EnumColors.white.color(),
