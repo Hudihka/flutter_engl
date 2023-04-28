@@ -1,6 +1,7 @@
-import 'package:english/Recources/EnumColors.dart';
-import 'package:english/Recources/EnumTexts.dart';
-import 'package:english/Recources/EnumFont.dart';
+import 'package:english/Recources/enum_colors.dart';
+import 'package:english/Recources/enum_all_texts.dart';
+import 'package:english/Recources/enum_font.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,13 +17,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(),
-      home: const MyHomePage(),
+      home: MyHomePage(title: EnumTexts.title.getText()),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+  const MyHomePage({super.key, required this.title});
+
+  final String title;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -41,8 +44,10 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text(
-          EnumTexts.titleText.getText(),
+          widget.title,
+          textAlign: TextAlign.center,
           style: TextStyleExtension.generateSemibold(size: 23),
         ),
         backgroundColor: EnumColors.white.color(),
@@ -54,6 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            _segmentControl(),
             const Text(
               'You have pushed the button this many times:',
             ),
@@ -70,5 +76,41 @@ class _MyHomePageState extends State<MyHomePage> {
         child: const Icon(Icons.add),
       ),
     );
+  }
+
+  Widget _segmentControl() {
+    return PreferredSize(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 8, bottom: 12),
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                child: CupertinoSlidingSegmentedControl<int>(
+                    backgroundColor: Color.fromARGB(255, 131, 50, 50),
+                    thumbColor: EnumColors.black.color(),
+                    // padding: EdgeInsets.only(top: 16, left: 16, right: 16),
+                    groupValue: 0,
+                    children: {
+                      0: Text(
+                        EnumTexts.all.getText(),
+                        style: TextStyleExtension.generate(
+                            color: EnumColors.white, size: 20),
+                      ),
+                      1: Text(
+                        EnumTexts.favorit.getText(),
+                        style: TextStyleExtension.generate(
+                            color: EnumColors.black, size: 20),
+                      )
+                    },
+                    onValueChanged: (value) {
+                      setState(() {
+                        // groupValue = value;
+                      });
+                    }),
+              ),
+            ],
+          ),
+        ),
+        preferredSize: Size(double.infinity, 70));
   }
 }

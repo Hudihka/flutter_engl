@@ -1,4 +1,4 @@
-import 'package:english/Recources/EnumColors.dart';
+import 'package:english/Recources/enum_colors.dart';
 import 'package:flutter/material.dart';
 
 enum EnumFontStyle { light, regular, medium, semiBold, bold }

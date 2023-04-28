@@ -1,9 +1,9 @@
-enum EnumTexts { titleText, all, favorit, hideTranslate }
+enum EnumTexts { title, all, favorit, hideTranslate }
 
 extension EnumTextsExtension on EnumTexts {
   String getText() {
     switch (this) {
-      case EnumTexts.titleText:
+      case EnumTexts.title:
         return 'Неправильные глаголы';
       case EnumTexts.all:
         return 'Все';
