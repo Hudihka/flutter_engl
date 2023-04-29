@@ -1,4 +1,4 @@
-enum EnumTexts { title, all, favorit, hideTranslate }
+enum EnumTexts { title, all, favorit, hideTranslate, notWord }
 
 extension EnumTextsExtension on EnumTexts {
   String getText() {
@@ -11,6 +11,8 @@ extension EnumTextsExtension on EnumTexts {
         return 'Фаворит';
       case EnumTexts.hideTranslate:
         return 'Скрыть перевод';
+      case EnumTexts.notWord:
+        return 'Нет слов';
     }
   }
 }
