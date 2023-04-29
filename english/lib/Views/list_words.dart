@@ -51,9 +51,20 @@ class ListWords extends StatelessWidget {
           itemBuilder: (BuildContext context, int index) {
             return StickyHeader(
               header: HederCell(group: content[index]),
-              content: WordCell(word: content[index].words.first),
+              content: _listCells(words: content[index].words),
             );
           });
     }
+  }
+
+  Widget _listCells({required List<Word> words}) {
+    List<Widget> list = [];
+    for (var word in words) {
+      list.add(WordCell(word: word));
+    }
+
+    return Column(
+      children: list,
+    );
   }
 }
