@@ -5,44 +5,36 @@ import 'package:english/Data/word.dart';
 import 'package:english/Data/group.dart';
 import 'package:english/Views/word_cell.dart';
 import 'package:english/Views/heder_cell.dart';
-import 'package:grouped_list/grouped_list.dart';
+import 'package:sticky_headers/sticky_headers.dart';
+import 'package:flutter/material.dart';
 
 class ListWords extends StatelessWidget {
   const ListWords({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // List<Word> contentWord = [];
+    List<Word> contentWord = [];
 
-    // for (var i = 0; i < 8; i++) {
-    //   Word word = Word(
-    //       trans: "trans$i",
-    //       form1: "form${i}1",
-    //       form2: "form${i}2",
-    //       form3: "form${i}3");
-    //   contentWord.add(word);
-    // }
+    for (var i = 0; i < 8; i++) {
+      Word word = Word(
+          trans: "trans$i",
+          form1: "form${i}1",
+          form2: "form${i}2",
+          form3: "form${i}3");
+      contentWord.add(word);
+    }
 
-    // List<Group> content = [
-    //   Group(number: 1, description: "description 1", words: contentWord),
-    //   Group(number: 2, description: "description 2", words: contentWord),
-    //   Group(number: 3, description: "description 3", words: contentWord),
-    //   Group(number: 4, description: "description 4", words: contentWord)
-    // ];
-
-    List _elements = [
-      {'name': 'John', 'group': 'Team A'},
-      {'name': 'Will', 'group': 'Team B'},
-      {'name': 'Beth', 'group': 'Team A'},
-      {'name': 'Miranda', 'group': 'Team B'},
-      {'name': 'Mike', 'group': 'Team C'},
-      {'name': 'Danny', 'group': 'Team C'},
+    List<Group> content = [
+      Group(number: 1, description: "description 1", words: contentWord),
+      Group(number: 2, description: "description 2", words: contentWord),
+      Group(number: 3, description: "description 3", words: contentWord),
+      Group(number: 4, description: "description 4", words: contentWord)
     ];
 
-    return Flexible(child: _returnWidget(_elements));
+    return Flexible(child: _returnWidget(content));
   }
 
-  Widget _returnWidget(List content) {
+  Widget _returnWidget(List<Group> content) {
     if (content.isEmpty) {
       return Center(
         child: Text(
@@ -52,16 +44,16 @@ class ListWords extends StatelessWidget {
         ),
       );
     } else {
-      return GroupedListView<dynamic, dynamic>(
-        elements: content,
-        groupBy: (element) => element,
-        order: GroupedListOrder.DESC,
-        useStickyGroupSeparators: true,
-        groupSeparatorBuilder: (dynamic value) => Text("0001"),
-        itemBuilder: (context, word) {
-          return Text("0000");
-        },
-      );
+      return ListView.builder(
+          physics: const BouncingScrollPhysics(),
+          scrollDirection: Axis.vertical,
+          itemCount: content.length,
+          itemBuilder: (BuildContext context, int index) {
+            return StickyHeader(
+              header: HederCell(group: content[index]),
+              content: WordCell(word: content[index].words.first),
+            );
+          });
     }
   }
 }

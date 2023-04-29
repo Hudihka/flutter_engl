@@ -43,9 +43,8 @@ class WordCell extends StatelessWidget {
                           size: 25, style: EnumFontStyle.bold),
                     ),
                   ),
-                  SizedBox(
-                    width: EnumOffsets.offset8.offset(),
-                  ),
+                  SizedBox(height: 90 //EnumOffsets.offset8.offset(),
+                      ),
                   Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
