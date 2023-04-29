@@ -1,5 +1,4 @@
 import 'package:english/Recources/enum_images.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:english/Data/word.dart';
 import 'package:english/Recources/enum_font.dart';
@@ -12,16 +11,6 @@ class WordCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Word> content = [];
-    for (var i = 0; i < 10; i++) {
-      Word word = Word(
-          trans: "trans$i",
-          form1: "form${i}1",
-          form2: "form${i}2",
-          form3: "form${i}3");
-      content.add(word);
-    }
-
     return SizedBox(
         width: double.infinity,
         child: Stack(

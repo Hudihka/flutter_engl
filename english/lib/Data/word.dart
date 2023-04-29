@@ -18,4 +18,17 @@ class Word {
 
     return Word(trans: trans, form1: form1, form2: form2, form3: form3);
   }
+
+  static List<Word> generateArray(List<Map<String, dynamic>> jsonArray) {
+    List<Word> words = [];
+    for (var json in jsonArray) {
+      words.add(Word.fromJson(json));
+    }
+
+    words.sort((obj1, obj2) {
+      return obj1.trans.toLowerCase().compareTo(obj2.trans.toLowerCase());
+    });
+
+    return words;
+  }
 }
