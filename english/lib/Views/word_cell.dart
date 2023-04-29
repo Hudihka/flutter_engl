@@ -1,4 +1,6 @@
+import 'package:english/Recources/enum_images.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:english/Data/word.dart';
 import 'package:english/Recources/enum_font.dart';
 import 'package:english/Recources/enum_offsets.dart';
@@ -21,36 +23,53 @@ class WordCell extends StatelessWidget {
     }
 
     return SizedBox(
-      width: double.infinity,
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-            horizontal: EnumOffsets.offset16.offset(),
-            vertical: EnumOffsets.offset8.offset()),
-        child: Column(
+        width: double.infinity,
+        child: Stack(
           children: [
             Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                // textAlign: TextAlign.left,
-                word.trans,
-                style: TextStyleExtension.generate(
-                    size: 25, style: EnumFontStyle.bold),
+              alignment: Alignment.topRight,
+              child: SizedBox(
+                height: EnumOffsets.offset50.offset(),
+                width: EnumOffsets.offset50.offset(),
+                child: IconButton(
+                  padding: EdgeInsets.all(EnumOffsets.offset13.offset()),
+                  color: Colors.red,
+                  icon: EnumImages.favorit.image(),
+                  iconSize: EnumOffsets.offset24.offset(),
+                  onPressed: () {},
+                ),
               ),
-            ),
-            SizedBox(
-              width: EnumOffsets.offset8.offset(),
-            ),
-            Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  textAlign: TextAlign.left,
-                  "${word.form1} ${word.form2} ${word.form3}",
-                  style: TextStyleExtension.generate(
-                      size: 25, style: EnumFontStyle.regular),
-                ))
+            )
+            // Padding(
+            //   padding: EdgeInsets.symmetric(
+            //       horizontal: EnumOffsets.offset16.offset(),
+            //       vertical: EnumOffsets.offset8.offset()),
+            //   child: Column(
+            //     children: [
+            //       Align(
+            //         alignment: Alignment.centerLeft,
+            //         child: Text(
+            //           // textAlign: TextAlign.left,
+            //           word.trans,
+            //           style: TextStyleExtension.generate(
+            //               size: 25, style: EnumFontStyle.bold),
+            //         ),
+            //       ),
+            //       SizedBox(
+            //         width: EnumOffsets.offset8.offset(),
+            //       ),
+            //       Align(
+            //           alignment: Alignment.centerLeft,
+            //           child: Text(
+            //             textAlign: TextAlign.left,
+            //             "${word.form1} ${word.form2} ${word.form3}",
+            //             style: TextStyleExtension.generate(
+            //                 size: 25, style: EnumFontStyle.regular),
+            //           ))
+            //     ],
+            //   ),
+            // ),
           ],
-        ),
-      ),
-    );
+        ));
   }
 }
