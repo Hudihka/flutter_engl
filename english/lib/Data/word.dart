@@ -19,7 +19,7 @@ class Word {
     return Word(trans: trans, form1: form1, form2: form2, form3: form3);
   }
 
-  static List<Word> generateArray(List<Map<String, dynamic>> jsonArray) {
+  static List<Word> generateArray(List<dynamic> jsonArray) {
     List<Word> words = [];
     for (var json in jsonArray) {
       words.add(Word.fromJson(json));
@@ -30,5 +30,9 @@ class Word {
     });
 
     return words;
+  }
+
+  String idWord() {
+    return "{$trans}_{$form1}";
   }
 }

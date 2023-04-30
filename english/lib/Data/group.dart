@@ -11,9 +11,18 @@ class Group {
     final int number = json['number'] ?? 0;
     final String description = json['description'] ?? "-";
 
-    final List<Map<String, dynamic>> jsonArray = json['array'] ?? [];
+    final List<dynamic> jsonArray = json['array'] ?? [];
     final List<Word> words = Word.generateArray(jsonArray);
 
     return Group(number: number, description: description, words: words);
+  }
+
+  static List<Group> generateAllGroup(List<Map<String, dynamic>> contentJSON) {
+    List<Group> groups = [];
+    for (var json in contentJSON) {
+      groups.add(Group.fromJson(json));
+    }
+
+    return groups;
   }
 }

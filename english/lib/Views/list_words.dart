@@ -3,6 +3,7 @@ import 'package:english/Recources/enum_font.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:english/Data/word.dart';
 import 'package:english/Data/group.dart';
+import 'package:english/Data/content_json.dart';
 import 'package:english/Views/word_cell.dart';
 import 'package:english/Views/heder_cell.dart';
 import 'package:sticky_headers/sticky_headers.dart';
@@ -13,23 +14,7 @@ class ListWords extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Word> contentWord = [];
-
-    for (var i = 0; i < 8; i++) {
-      Word word = Word(
-          trans: "trans$i",
-          form1: "form${i}1",
-          form2: "form${i}2",
-          form3: "form${i}3");
-      contentWord.add(word);
-    }
-
-    List<Group> content = [
-      Group(number: 1, description: "description 1", words: contentWord),
-      Group(number: 2, description: "description 2", words: contentWord),
-      Group(number: 3, description: "description 3", words: contentWord),
-      Group(number: 4, description: "description 4", words: contentWord)
-    ];
+    List<Group> content = Group.generateAllGroup(contentJSON);
 
     return Flexible(child: _returnWidget(content));
   }
