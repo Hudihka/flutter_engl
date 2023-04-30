@@ -22,7 +22,7 @@ class WordCell extends StatelessWidget {
                 width: EnumOffsets.offset50.offset(),
                 child: IconButton(
                   padding: EdgeInsets.all(EnumOffsets.offset13.offset()),
-                  icon: EnumImages.favorit.image(),
+                  icon: _generateImage(),
                   iconSize: EnumOffsets.offset24.offset(),
                   onPressed: () {},
                 ),
@@ -59,5 +59,11 @@ class WordCell extends StatelessWidget {
             ),
           ],
         ));
+  }
+
+  Image _generateImage() {
+    return word.isFavorit()
+        ? EnumImages.favorit.image()
+        : EnumImages.not_favorit.image();
   }
 }

@@ -1,9 +1,10 @@
 import 'package:english/Data/word.dart';
+import 'package:english/Data/content_json.dart';
 
 class Group {
   final int number;
   final String description;
-  final List<Word> words;
+  List<Word> words;
 
   Group({required this.number, required this.description, required this.words});
 
@@ -17,10 +18,30 @@ class Group {
     return Group(number: number, description: description, words: words);
   }
 
-  static List<Group> generateAllGroup(List<Map<String, dynamic>> contentJSON) {
+  List<Word> onlyFavorit() {
+    return words.where((element) => element.isFavorit()).toList();
+  }
+
+  static List<Group> generateAllGroup() {
     List<Group> groups = [];
     for (var json in contentJSON) {
       groups.add(Group.fromJson(json));
+    }
+
+    return groups;
+  }
+
+  static List<Group> generateAllGroupFavorit() {
+    List<Group> groups = [];
+
+    for (var json in contentJSON) {
+      final group = Group.fromJson(json);
+      final favorits =
+          group.words.where((element) => element.isFavorit()).toList();
+      if (favorits.isNotEmpty) {
+        group.words = favorits;
+        groups.add(group);
+      }
     }
 
     return groups;

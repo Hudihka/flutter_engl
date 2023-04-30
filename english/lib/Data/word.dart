@@ -1,3 +1,8 @@
+import 'dart:math';
+
+import 'package:flutter/material.dart';
+import 'package:english/Data/user_defaults.dart';
+
 class Word {
   final String trans;
   final String form1;
@@ -32,7 +37,16 @@ class Word {
     return words;
   }
 
-  String idWord() {
+  String _idWord() {
     return "{$trans}_{$form1}";
   }
+
+  bool isFavorit() {
+    return Random().nextInt(100000000) / 2 == 0;
+  }
+
+  // Future<bool> isFavorit() {
+  //   final ud = UserDefaults.shared;
+  //   return ud.favoritThisWord(_idWord());
+  // }
 }
