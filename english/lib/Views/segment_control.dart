@@ -18,7 +18,7 @@ class SegmentControl extends StatelessWidget {
         padding:
             EdgeInsets.symmetric(horizontal: EnumOffsets.offset16.offset()),
         child: CupertinoSlidingSegmentedControl<int>(
-            backgroundColor: EnumColors.white.color(),
+            backgroundColor: EnumColors.gray.color(),
             thumbColor: EnumColors.black.color(),
             groupValue: index,
             children: {

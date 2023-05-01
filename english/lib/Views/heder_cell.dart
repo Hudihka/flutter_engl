@@ -13,7 +13,7 @@ class HederCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: EnumColors.black.color(),
+        color: EnumColors.gray.color(),
         width: double.infinity,
         child: Padding(
           padding: EdgeInsets.symmetric(
@@ -26,9 +26,7 @@ class HederCell extends StatelessWidget {
                 child: Text(
                   EnumTexts.sections.getText() + " " + group.number.toString(),
                   style: TextStyleExtension.generate(
-                      size: 20,
-                      style: EnumFontStyle.bold,
-                      color: EnumColors.white),
+                      size: 20, style: EnumFontStyle.bold),
                 ),
               ),
               SizedBox(
@@ -40,9 +38,7 @@ class HederCell extends StatelessWidget {
                     textAlign: TextAlign.left,
                     group.description,
                     style: TextStyleExtension.generate(
-                        size: 18,
-                        style: EnumFontStyle.regular,
-                        color: EnumColors.white),
+                        size: 18, style: EnumFontStyle.regular),
                   ))
             ],
           ),
