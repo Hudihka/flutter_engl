@@ -5,7 +5,10 @@ import 'package:english/Recources/enum_font.dart';
 import 'package:english/Recources/enum_offsets.dart';
 
 class SegmentControl extends StatelessWidget {
-  const SegmentControl({super.key});
+  int index;
+  late Function(int) tapedSegment;
+
+  SegmentControl({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +20,7 @@ class SegmentControl extends StatelessWidget {
         child: CupertinoSlidingSegmentedControl<int>(
             backgroundColor: EnumColors.white.color(),
             thumbColor: EnumColors.black.color(),
-            groupValue: 0,
+            groupValue: index,
             children: {
               0: Padding(
                 padding: EdgeInsets.all(EnumOffsets.offset6.offset()),
@@ -40,10 +43,8 @@ class SegmentControl extends StatelessWidget {
                 ),
               )
             },
-            onValueChanged: (value) {
-              // setState(() {
-              // groupValue = value;
-              // });
+            onValueChanged: (int? value) {
+              tapedSegment(value ?? 0);
             }),
       ),
     );

@@ -1,3 +1,4 @@
+import 'package:english/Recources/enum_colors.dart';
 import 'package:english/Recources/enum_images.dart';
 import 'package:flutter/material.dart';
 import 'package:english/Data/word.dart';
@@ -5,9 +6,12 @@ import 'package:english/Recources/enum_font.dart';
 import 'package:english/Recources/enum_offsets.dart';
 
 class WordCell extends StatelessWidget {
-  WordCell({super.key, required this.word});
+  WordCell({super.key, required this.word, required this.showContent});
 
   Word word;
+  bool showContent;
+
+  late Function(Word) tapedWord;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +28,9 @@ class WordCell extends StatelessWidget {
                   padding: EdgeInsets.all(EnumOffsets.offset13.offset()),
                   icon: _generateImage(),
                   iconSize: EnumOffsets.offset24.offset(),
-                  onPressed: () {},
+                  onPressed: () {
+                    tapedWord(word);
+                  },
                 ),
               ),
             ),
@@ -52,7 +58,11 @@ class WordCell extends StatelessWidget {
                         textAlign: TextAlign.left,
                         "${word.form1} ${word.form2} ${word.form3}",
                         style: TextStyleExtension.generate(
-                            size: 25, style: EnumFontStyle.regular),
+                            size: 25,
+                            style: EnumFontStyle.regular,
+                            color: showContent
+                                ? EnumColors.black
+                                : EnumColors.clear),
                       ))
                 ],
               ),

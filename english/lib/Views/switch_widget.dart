@@ -5,7 +5,11 @@ import 'package:english/Recources/enum_font.dart';
 import 'package:english/Recources/enum_offsets.dart';
 
 class SwitchWidget extends StatelessWidget {
-  const SwitchWidget({super.key});
+  bool value;
+
+  SwitchWidget({super.key, required this.value});
+
+  late Function(bool) tapedSwitch;
 
   @override
   Widget build(BuildContext context) {
@@ -17,12 +21,10 @@ class SwitchWidget extends StatelessWidget {
         child: Row(
           children: [
             CupertinoSwitch(
-              value: true,
+              value: value,
               activeColor: EnumColors.black.color(),
               onChanged: (bool? value) {
-                // setState(() {
-                //   // switchValue = value ?? false;
-                // });
+                tapedSwitch(value ?? false);
               },
             ),
             SizedBox(

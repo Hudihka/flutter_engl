@@ -44,7 +44,15 @@ class ListWords extends StatelessWidget {
   Widget _listCells({required List<Word> words}) {
     List<Widget> list = [];
     for (var word in words) {
-      list.add(WordCell(word: word));
+      final cell = WordCell(
+        word: word,
+        showContent: true,
+      );
+      cell.tapedWord = (Word word) {
+        // меняем фаворит/не фаворит
+      };
+
+      list.add(cell);
     }
 
     return Column(

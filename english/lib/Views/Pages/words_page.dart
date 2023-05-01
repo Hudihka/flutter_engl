@@ -45,11 +45,11 @@ class _WordsPageState extends State<WordsPage> {
             SizedBox(
               height: EnumOffsets.offset16.offset(),
             ),
-            const SegmentControl(),
+            _segmentWidget(),
             SizedBox(
               height: EnumOffsets.offset16.offset(),
             ),
-            const SwitchWidget(),
+            _switchWidget(),
             SizedBox(
               height: EnumOffsets.offset16.offset(),
             ),
@@ -58,5 +58,27 @@ class _WordsPageState extends State<WordsPage> {
         ),
       ),
     );
+  }
+
+  Widget _segmentWidget() {
+    final widget = SegmentControl(
+      index: 0,
+    );
+    widget.tapedSegment = ((int value) {
+      print(value);
+    });
+
+    return widget;
+  }
+
+  Widget _switchWidget() {
+    final widget = SwitchWidget(
+      value: true,
+    );
+    widget.tapedSwitch = ((bool value) {
+      print(value);
+    });
+
+    return widget;
   }
 }
