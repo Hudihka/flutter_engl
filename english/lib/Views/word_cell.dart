@@ -72,7 +72,7 @@ class WordCell extends StatelessWidget {
   }
 
   Image _generateImage() {
-    return word.isFavorit()
+    return word.isFavorit
         ? EnumImages.favorit.image()
         : EnumImages.not_favorit.image();
   }

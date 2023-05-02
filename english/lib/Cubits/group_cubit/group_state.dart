@@ -4,49 +4,52 @@ part of 'group_cubit.dart';
 abstract class GroupState {}
 
 class GroupInitial extends GroupState {
-  List<Group> listWord;
-  List<Group> listSelectedWords;
+  List<Group> listGroup;
+  List<Group> listSelectedGroups;
   bool switchValue;
   int index;
 
   GroupInitial(
-      {required this.listWord,
-      required this.listSelectedWords,
+      {required this.listGroup,
+      required this.listSelectedGroups,
       required this.switchValue,
       required this.index});
 
   factory GroupInitial.generateBase() {
-    List<Group> listWord = Group.generateAllGroup();
-    List<Group> listSelectedWords = Group.generateAllGroupFavorit();
+    List<Group> listGroup = Group.generateAllGroup();
+    List<Group> listSelectedGroups = Group.generateAllGroupFavorit();
 
     return GroupInitial(
-        listSelectedWords: listSelectedWords,
-        listWord: listWord,
+        listSelectedGroups: listSelectedGroups,
+        listGroup: listGroup,
         switchValue: true,
         index: 0);
   }
 }
 
 class GroupContent extends GroupState {
-  List<Word> listWord;
-  List<Word> listSelectedWords;
+  List<Group> listGroup;
+  List<Group> listSelectedGroups;
   bool switchValue;
   int index;
 
   GroupContent(
-      {required this.listWord,
-      required this.listSelectedWords,
+      {required this.listGroup,
+      required this.listSelectedGroups,
       required this.switchValue,
       required this.index});
 
-  GroupContent copyWith(List<Word>? listWord, List<Word>? listSelectedWords,
-      bool? switchValue, int? index) {
-    if (listWord != null) {
-      this.listWord = listWord;
+  GroupContent copyWith(
+      {List<Group>? listGroup,
+      List<Group>? listSelectedGroups,
+      bool? switchValue,
+      int? index}) {
+    if (listGroup != null) {
+      this.listGroup = listGroup;
     }
 
-    if (listSelectedWords != null) {
-      this.listSelectedWords = listSelectedWords;
+    if (listSelectedGroups != null) {
+      this.listSelectedGroups = listSelectedGroups;
     }
 
     if (switchValue != null) {
@@ -60,7 +63,7 @@ class GroupContent extends GroupState {
     return GroupContent(
         index: this.index,
         switchValue: this.switchValue,
-        listSelectedWords: this.listSelectedWords,
-        listWord: this.listWord);
+        listSelectedGroups: this.listSelectedGroups,
+        listGroup: this.listGroup);
   }
 }

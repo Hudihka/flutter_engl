@@ -8,31 +8,44 @@ part 'group_state.dart';
 
 class GroupCubit extends Cubit<GroupState> {
   final _ud = UserDefaults.shared;
-  // final GroupState groupState;
+  final GroupContent groupState;
 
-  GroupCubit() : super(GroupInitial.generateBase());
+  GroupCubit(this.groupState) : super(GroupInitial.generateBase());
 
-  // Future<void> fetchContent() async {
-  //   //показываем в начале пустой экран
+  Future<void> fetchContent() async {
+    final switchValue = await _ud.getSwitchValue();
+    final segmentValue = await _ud.getSegmentIndex();
 
-  //   emit(userState.copyWith(
-  //       listThemes: [], selectedTheme: [], allSelected: false, countWord: 0));
+    final allGroup = Group.generateAllGroup();
+    final allGroupFavorit = Group.generateAllGroupFavorit();
 
-  //   final ids = await cash.idsWord;
-  //   await _themeProvider.loadContent(ids);
+    emit(groupState.copyWith(
+        listGroup: allGroup,
+        listSelectedGroups: allGroupFavorit,
+        switchValue: switchValue,
+        index: segmentValue));
+  }
 
-  //   //грузим темы из памяти
-  //   _listThemes = await cash.getAllThemes();
+  Future<void> tapedSegment(int index) async {
+    await _ud.saveIndexSegment(index);
+    final segmentValue = await _ud.getSegmentIndex();
 
-  //   var allCount = 0;
-  //   for (var them in _listThemes) {
-  //     allCount += them.listWord.length;
-  //   }
+    emit(groupState.copyWith(index: segmentValue));
+  }
 
-  //   emit(userState.copyWith(
-  //       listThemes: _listThemes,
-  //       selectedTheme: [],
-  //       allSelected: false,
-  //       countWord: allCount));
-  // }
+  Future<void> tapedSwitch(bool value) async {
+    await _ud.saveSwitch(value);
+    final switchValue = await _ud.getSwitchValue();
+
+    emit(groupState.copyWith(switchValue: switchValue));
+  }
+
+  Future<void> tapedWord(Word word) async {
+    final isFavorit = await word.isFavorit();
+    await _ud.saveWord(word.idWord(), isFavorit);
+    // получаем список всех груп
+    final switchValue = await _ud.getSwitchValue();
+
+    emit(groupState.copyWith(switchValue: switchValue));
+  }
 }

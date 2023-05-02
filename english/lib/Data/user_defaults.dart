@@ -19,7 +19,7 @@ class UserDefaults {
     defaults.setBool(_EnumKeysDefaults.keySwitch.toString(), value);
   }
 
-  saveWord(String wordId, Bool isFavorit) async {
+  saveWord(String wordId, bool isFavorit) async {
     SharedPreferences defaults = await SharedPreferences.getInstance();
     if (isFavorit == true) {
       defaults.setBool(wordId, true);

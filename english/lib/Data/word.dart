@@ -8,26 +8,34 @@ class Word {
   final String form1;
   final String form2;
   final String form3;
+  final int numberGroup;
+  final bool isFavorit = false;
 
   Word(
       {required this.trans,
       required this.form1,
       required this.form2,
-      required this.form3});
+      required this.form3,
+      required this.numberGroup});
 
-  factory Word.fromJson(Map<String, dynamic> json) {
+  factory Word.fromJson(Map<String, dynamic> json, int numberGroup) {
     final String trans = json['trans'] ?? "-";
     final String form1 = json['form1'] ?? "-";
     final String form2 = json['form2'] ?? "-";
     final String form3 = json['form3'] ?? "-";
 
-    return Word(trans: trans, form1: form1, form2: form2, form3: form3);
+    return Word(
+        trans: trans,
+        form1: form1,
+        form2: form2,
+        form3: form3,
+        numberGroup: numberGroup);
   }
 
-  static List<Word> generateArray(List<dynamic> jsonArray) {
+  static List<Word> generateArray(List<dynamic> jsonArray, int numberGroup) {
     List<Word> words = [];
     for (var json in jsonArray) {
-      words.add(Word.fromJson(json));
+      words.add(Word.fromJson(json, numberGroup));
     }
 
     words.sort((obj1, obj2) {
@@ -37,16 +45,7 @@ class Word {
     return words;
   }
 
-  String _idWord() {
+  String idWord() {
     return "{$trans}_{$form1}";
   }
-
-  bool isFavorit() {
-    return Random().nextInt(100000000) / 2 == 0;
-  }
-
-  // Future<bool> isFavorit() {
-  //   final ud = UserDefaults.shared;
-  //   return ud.favoritThisWord(_idWord());
-  // }
 }
