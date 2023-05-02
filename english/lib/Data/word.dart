@@ -8,34 +8,27 @@ class Word {
   final String form1;
   final String form2;
   final String form3;
-  final int numberGroup;
-  final bool isFavorit = false;
+  bool isFavorit = false;
 
   Word(
       {required this.trans,
       required this.form1,
       required this.form2,
-      required this.form3,
-      required this.numberGroup});
+      required this.form3});
 
-  factory Word.fromJson(Map<String, dynamic> json, int numberGroup) {
+  factory Word.fromJson(Map<String, dynamic> json) {
     final String trans = json['trans'] ?? "-";
     final String form1 = json['form1'] ?? "-";
     final String form2 = json['form2'] ?? "-";
     final String form3 = json['form3'] ?? "-";
 
-    return Word(
-        trans: trans,
-        form1: form1,
-        form2: form2,
-        form3: form3,
-        numberGroup: numberGroup);
+    return Word(trans: trans, form1: form1, form2: form2, form3: form3);
   }
 
-  static List<Word> generateArray(List<dynamic> jsonArray, int numberGroup) {
+  static List<Word> generateArray(List<dynamic> jsonArray) {
     List<Word> words = [];
     for (var json in jsonArray) {
-      words.add(Word.fromJson(json, numberGroup));
+      words.add(Word.fromJson(json));
     }
 
     words.sort((obj1, obj2) {

@@ -13,7 +13,7 @@ class Group {
     final String description = json['description'] ?? "-";
 
     final List<dynamic> jsonArray = json['array'] ?? [];
-    final List<Word> words = Word.generateArray(jsonArray, number - 1);
+    final List<Word> words = Word.generateArray(jsonArray);
 
     return Group(number: number, description: description, words: words);
   }
@@ -21,20 +21,4 @@ class Group {
   List<Word> onlyFavorit() {
     return words.where((element) => element.isFavorit).toList();
   }
-
-  // static List<Group> generateAllGroupFavorit() {
-  //   List<Group> groups = [];
-
-  //   for (var json in contentJSON) {
-  //     final group = Group.fromJson(json);
-  //     final favorits =
-  //         group.words.where((element) => element.isFavorit()).toList();
-  //     if (favorits.isNotEmpty) {
-  //       group.words = favorits;
-  //       groups.add(group);
-  //     }
-  //   }
-
-  //   return groups;
-  // }
 }

@@ -4,6 +4,8 @@ import 'package:english/Data/user_defaults.dart';
 import 'package:english/Data/word.dart';
 import 'package:meta/meta.dart';
 
+import '../../Data/content_json.dart';
+
 part 'group_state.dart';
 
 class GroupCubit extends Cubit<GroupState> {
@@ -16,12 +18,11 @@ class GroupCubit extends Cubit<GroupState> {
     final switchValue = await _ud.getSwitchValue();
     final segmentValue = await _ud.getSegmentIndex();
 
-    final allGroup = Group.generateAllGroup();
-    final allGroupFavorit = Group.generateAllGroupFavorit();
+    final content = await Content.generateContentWithFavorit();
 
     emit(groupState.copyWith(
-        listGroup: allGroup,
-        listSelectedGroups: allGroupFavorit,
+        listGroup: content.allGroup,
+        listSelectedGroups: content.allOnlyFavorit,
         switchValue: switchValue,
         index: segmentValue));
   }
@@ -41,11 +42,14 @@ class GroupCubit extends Cubit<GroupState> {
   }
 
   Future<void> tapedWord(Word word) async {
-    final isFavorit = await word.isFavorit();
-    await _ud.saveWord(word.idWord(), isFavorit);
-    // получаем список всех груп
-    final switchValue = await _ud.getSwitchValue();
+    final isFavoritNewValue = !word.isFavorit;
+    final id = word.idWord();
+    await _ud.saveWord(id, isFavoritNewValue);
 
-    emit(groupState.copyWith(switchValue: switchValue));
+    final content = Content.updateWordsFavorit(isFavoritNewValue, id);
+
+    emit(groupState.copyWith(
+        listGroup: content.allGroup,
+        listSelectedGroups: content.allOnlyFavorit));
   }
 }

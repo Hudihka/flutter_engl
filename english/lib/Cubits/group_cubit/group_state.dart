@@ -16,11 +16,10 @@ class GroupInitial extends GroupState {
       required this.index});
 
   factory GroupInitial.generateBase() {
-    List<Group> listGroup = Group.generateAllGroup();
-    List<Group> listSelectedGroups = Group.generateAllGroupFavorit();
+    List<Group> listGroup = Content.generateAllGroupStart();
 
     return GroupInitial(
-        listSelectedGroups: listSelectedGroups,
+        listSelectedGroups: const [],
         listGroup: listGroup,
         switchValue: true,
         index: 0);

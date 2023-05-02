@@ -1,6 +1,8 @@
 import 'dart:ffi';
 
 import 'package:english/Data/group.dart';
+import 'package:english/Data/user_defaults.dart';
+import 'package:english/Data/word.dart';
 
 class Content {
   static List<Map<String, dynamic>> _contentJSON = [
@@ -714,17 +716,91 @@ class Content {
     }
   ];
 
-  static Set<String> setFavorits = {};
+  static List<Group> _allStart = [];
 
   // генерация контента первый раз
-  static List<Group> generateAllGroupStart() {
+  static generateAllGroupStart() {
     List<Group> groups = [];
     for (var json in _contentJSON) {
       groups.add(Group.fromJson(json));
     }
 
+    _allStart = groups;
     return groups;
   }
 
-  static generateFavoritContent() {}
+  static Future<ArraysContent> generateContentWithFavorit() async {
+    UserDefaults ud = UserDefaults.shared;
+    List<Group> allGroup = [];
+    List<Group> allOnlyFavorit = [];
+
+    for (var group in _allStart) {
+      List<Word> allWord = [];
+      List<Word> onlyFavoritWord = [];
+
+      for (var word in group.words) {
+        bool isFavorit = await ud.favoritThisWord(word.idWord());
+        word.isFavorit = isFavorit;
+
+        allWord.add(word);
+
+        if (isFavorit) {
+          onlyFavoritWord.add(word);
+        }
+      }
+
+      final newGroup = Group(
+          number: group.number, description: group.description, words: allWord);
+      final newGroupFavorit = Group(
+          number: group.number,
+          description: group.description,
+          words: onlyFavoritWord);
+
+      allGroup.add(newGroup);
+      allOnlyFavorit.add(newGroupFavorit);
+    }
+
+    return ArraysContent(allGroup: allGroup, allOnlyFavorit: allOnlyFavorit);
+  }
+
+  static ArraysContent updateWordsFavorit(bool newValue, String idWord) {
+    List<Group> allGroup = [];
+    List<Group> allOnlyFavorit = [];
+
+    for (var group in _allStart) {
+      List<Word> allWord = [];
+      List<Word> onlyFavoritWord = [];
+
+      for (var word in group.words) {
+        if (word.idWord() == idWord) {
+          word.isFavorit = newValue;
+        }
+
+        allWord.add(word);
+
+        if (word.isFavorit) {
+          onlyFavoritWord.add(word);
+        }
+      }
+
+      final newGroup = Group(
+          number: group.number, description: group.description, words: allWord);
+      final newGroupFavorit = Group(
+          number: group.number,
+          description: group.description,
+          words: onlyFavoritWord);
+
+      allGroup.add(newGroup);
+      allOnlyFavorit.add(newGroupFavorit);
+    }
+
+    return ArraysContent(allGroup: allGroup, allOnlyFavorit: allOnlyFavorit);
+  }
+}
+
+class ArraysContent {
+  List<Group> allGroup;
+  List<Group> allOnlyFavorit;
+
+  ArraysContent({required this.allGroup, required this.allOnlyFavorit});
 }
