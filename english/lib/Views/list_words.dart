@@ -9,12 +9,13 @@ import 'package:sticky_headers/sticky_headers.dart';
 import 'package:flutter/material.dart';
 
 class ListWords extends StatelessWidget {
-  const ListWords({super.key});
+  List<Group> content;
+  bool showContent;
+
+  ListWords({super.key, required this.content, required this.showContent});
 
   @override
   Widget build(BuildContext context) {
-    List<Group> content = Group.generateAllGroup();
-
     return Flexible(child: _returnWidget(content));
   }
 

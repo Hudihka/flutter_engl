@@ -12,7 +12,7 @@ class GroupCubit extends Cubit<GroupState> {
   final _ud = UserDefaults.shared;
   final GroupContent groupState;
 
-  GroupCubit(this.groupState) : super(GroupInitial.generateBase());
+  GroupCubit(this.groupState) : super(GroupContent.generateBase());
 
   Future<void> fetchContent() async {
     final switchValue = await _ud.getSwitchValue();

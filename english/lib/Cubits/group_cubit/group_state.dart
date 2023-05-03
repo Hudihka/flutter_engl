@@ -3,29 +3,6 @@ part of 'group_cubit.dart';
 @immutable
 abstract class GroupState {}
 
-class GroupInitial extends GroupState {
-  List<Group> listGroup;
-  List<Group> listSelectedGroups;
-  bool switchValue;
-  int index;
-
-  GroupInitial(
-      {required this.listGroup,
-      required this.listSelectedGroups,
-      required this.switchValue,
-      required this.index});
-
-  factory GroupInitial.generateBase() {
-    List<Group> listGroup = Content.generateAllGroupStart();
-
-    return GroupInitial(
-        listSelectedGroups: const [],
-        listGroup: listGroup,
-        switchValue: true,
-        index: 0);
-  }
-}
-
 class GroupContent extends GroupState {
   List<Group> listGroup;
   List<Group> listSelectedGroups;
@@ -37,6 +14,16 @@ class GroupContent extends GroupState {
       required this.listSelectedGroups,
       required this.switchValue,
       required this.index});
+
+  factory GroupContent.generateBase() {
+    List<Group> listGroup = Content.generateAllGroupStart();
+
+    return GroupContent(
+        listSelectedGroups: const [],
+        listGroup: listGroup,
+        switchValue: true,
+        index: 0);
+  }
 
   GroupContent copyWith(
       {List<Group>? listGroup,
