@@ -28,7 +28,7 @@ class SegmentControl extends StatelessWidget {
                   EnumTexts.all.getText(),
                   style: TextStyleExtension.generate(
                       style: EnumFontStyle.semiBold,
-                      color: EnumColors.white,
+                      color: _generateColor(0),
                       size: 20),
                 ),
               ),
@@ -38,7 +38,7 @@ class SegmentControl extends StatelessWidget {
                   EnumTexts.favorit.getText(),
                   style: TextStyleExtension.generate(
                       style: EnumFontStyle.semiBold,
-                      color: EnumColors.black,
+                      color: _generateColor(1),
                       size: 20),
                 ),
               )
@@ -48,5 +48,9 @@ class SegmentControl extends StatelessWidget {
             }),
       ),
     );
+  }
+
+  EnumColors _generateColor(int index) {
+    return index == this.index ? EnumColors.white : EnumColors.black;
   }
 }
