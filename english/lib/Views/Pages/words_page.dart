@@ -25,6 +25,7 @@ class WordsPage extends StatelessWidget {
     SingltonsCubit.shared.saveGroupCubit(_contentCubit);
 
     return BlocBuilder<GroupCubit, GroupState>(builder: (context, state) {
+      _contentCubit.fetchContent();
       if (state is GroupContent) {
         _index = state.index;
         _switchValue = state.switchValue;
