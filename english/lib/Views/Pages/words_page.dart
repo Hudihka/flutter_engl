@@ -74,7 +74,7 @@ class WordsPage extends StatelessWidget {
       index: _index,
     );
     widget.tapedSegment = ((int value) {
-      print(value);
+      _contentCubit.tapedSegment(value);
     });
 
     return widget;
@@ -85,7 +85,7 @@ class WordsPage extends StatelessWidget {
       value: _switchValue,
     );
     widget.tapedSwitch = ((bool value) {
-      print(value);
+      _contentCubit.tapedSwitch(value);
     });
 
     return widget;

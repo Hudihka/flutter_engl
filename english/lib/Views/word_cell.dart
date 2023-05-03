@@ -61,8 +61,8 @@ class WordCell extends StatelessWidget {
                             size: 25,
                             style: EnumFontStyle.regular,
                             color: showContent
-                                ? EnumColors.black
-                                : EnumColors.clear),
+                                ? EnumColors.clear
+                                : EnumColors.black),
                       ))
                 ],
               ),

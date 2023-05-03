@@ -1,3 +1,4 @@
+import 'package:english/Cubits/singlton_cubits.dart';
 import 'package:english/Recources/enum_all_texts.dart';
 import 'package:english/Recources/enum_font.dart';
 import 'package:flutter/cupertino.dart';
@@ -47,10 +48,10 @@ class ListWords extends StatelessWidget {
     for (var word in words) {
       final cell = WordCell(
         word: word,
-        showContent: true,
+        showContent: showContent,
       );
       cell.tapedWord = (Word word) {
-        // меняем фаворит/не фаворит
+        SingltonsCubit.shared.getGroupCubit.tapedWord(word);
       };
 
       list.add(cell);

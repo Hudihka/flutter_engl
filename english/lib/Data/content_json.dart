@@ -785,13 +785,16 @@ class Content {
 
       final newGroup = Group(
           number: group.number, description: group.description, words: allWord);
-      final newGroupFavorit = Group(
-          number: group.number,
-          description: group.description,
-          words: onlyFavoritWord);
-
       allGroup.add(newGroup);
-      allOnlyFavorit.add(newGroupFavorit);
+
+      if (onlyFavoritWord.isNotEmpty) {
+        final newGroupFavorit = Group(
+            number: group.number,
+            description: group.description,
+            words: onlyFavoritWord);
+
+        allOnlyFavorit.add(newGroupFavorit);
+      }
     }
 
     return ArraysContent(allGroup: allGroup, allOnlyFavorit: allOnlyFavorit);
