@@ -32,62 +32,62 @@ class WordsPage extends StatelessWidget {
       }
 
       return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text(
-            EnumTexts.title.getText(),
-            textAlign: TextAlign.center,
-            style: TextStyleExtension.generateSemibold(size: 23),
+          appBar: AppBar(
+            centerTitle: true,
+            title: Text(
+              EnumTexts.title.getText(),
+              textAlign: TextAlign.center,
+              style: TextStyleExtension.generateSemibold(size: 23),
+            ),
+            backgroundColor: EnumColors.white.color(),
+            shadowColor: EnumColors.clear.color(),
           ),
-          backgroundColor: EnumColors.white.color(),
-          shadowColor: EnumColors.clear.color(),
-        ),
-        body: Container(
-              width: double.infinity,
-              color: EnumColors.white.color(),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  SizedBox(
-                    height: EnumOffsets.offset16.offset(),
-                  ),
-                  _segmentWidget(),
-                  SizedBox(
-                    height: EnumOffsets.offset16.offset(),
-                  ),
-                  _switchWidget(),
-                  SizedBox(
-                    height: EnumOffsets.offset16.offset(),
-                  ),
-                  ListWords(
-                    content: _listGroup,
-                    showContent: _switchValue,
-                  )
-                ],
-              ),
-            )
-    );
+          body: Container(
+            width: double.infinity,
+            color: EnumColors.white.color(),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(
+                  height: EnumOffsets.offset16.offset(),
+                ),
+                _segmentWidget(),
+                SizedBox(
+                  height: EnumOffsets.offset16.offset(),
+                ),
+                _switchWidget(),
+                SizedBox(
+                  height: EnumOffsets.offset16.offset(),
+                ),
+                ListWords(
+                  content: _listGroup,
+                  showContent: _switchValue,
+                )
+              ],
+            ),
+          ));
+    });
   }
 
-  // Widget _segmentWidget() {
-  //   final widget = SegmentControl(
-  //     index: _index,
-  //   );
-  //   widget.tapedSegment = ((int value) {
-  //     print(value);
-  //   });
+  Widget _segmentWidget() {
+    final widget = SegmentControl(
+      index: _index,
+    );
+    widget.tapedSegment = ((int value) {
+      print(value);
+    });
 
-  //   return widget;
-  // }
+    return widget;
+  }
 
-  // Widget _switchWidget() {
-  //   final widget = SwitchWidget(
-  //     value: _switchValue,
-  //   );
-  //   widget.tapedSwitch = ((bool value) {
-  //     print(value);
-  //   });
+  Widget _switchWidget() {
+    final widget = SwitchWidget(
+      value: _switchValue,
+    );
+    widget.tapedSwitch = ((bool value) {
+      print(value);
+    });
 
-  //   return widget;
-  // }
+    return widget;
+  }
 }

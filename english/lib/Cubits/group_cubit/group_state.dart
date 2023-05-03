@@ -21,7 +21,7 @@ class GroupContent extends GroupState {
     return GroupContent(
         listSelectedGroups: const [],
         listGroup: listGroup,
-        switchValue: true,
+        switchValue: false,
         index: 0);
   }
 
