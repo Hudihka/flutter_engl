@@ -8,14 +8,29 @@ import 'package:english/Views/switch_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:english/Cubits/group_cubit/group_cubit.dart';
+import 'package:english/Cubits/singlton_cubits.dart';
+import 'package:english/Data/group.dart';
 
 class WordsPage extends StatelessWidget {
-  // GroupCubit _contentCubit;
+  late GroupCubit _contentCubit;
+
+  late int _index;
+  late bool _switchValue;
+  late List<Group> _listGroup;
 
   @override
   Widget build(BuildContext context) {
-    // ThemeCubit _contentCubit;
+    _contentCubit = context.read();
+
+    SingltonsCubit.shared.saveGroupCubit(_contentCubit);
+
     return BlocBuilder<GroupCubit, GroupState>(builder: (context, state) {
+      if (state is GroupContent) {
+        _index = state.index;
+        _switchValue = state.switchValue;
+        _listGroup = _index == 0 ? state.listGroup : state.listSelectedGroups;
+      }
+
       return Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -27,13 +42,7 @@ class WordsPage extends StatelessWidget {
           backgroundColor: EnumColors.white.color(),
           shadowColor: EnumColors.clear.color(),
         ),
-        body: MultiBlocProvider(
-            providers: [
-              BlocProvider<GroupCubit>(
-                create: (context) => GroupCubit(GroupContent.generateBase()),
-              ),
-            ],
-            child: Container(
+        body: Container(
               width: double.infinity,
               color: EnumColors.white.color(),
               child: Column(
@@ -51,35 +60,34 @@ class WordsPage extends StatelessWidget {
                     height: EnumOffsets.offset16.offset(),
                   ),
                   ListWords(
-                    content: [],
-                    showContent: false,
+                    content: _listGroup,
+                    showContent: _switchValue,
                   )
                 ],
               ),
-            )),
-      );
-    });
-  }
-
-  Widget _segmentWidget() {
-    final widget = SegmentControl(
-      index: 0,
+            )
     );
-    widget.tapedSegment = ((int value) {
-      print(value);
-    });
-
-    return widget;
   }
 
-  Widget _switchWidget() {
-    final widget = SwitchWidget(
-      value: true,
-    );
-    widget.tapedSwitch = ((bool value) {
-      print(value);
-    });
+  // Widget _segmentWidget() {
+  //   final widget = SegmentControl(
+  //     index: _index,
+  //   );
+  //   widget.tapedSegment = ((int value) {
+  //     print(value);
+  //   });
 
-    return widget;
-  }
+  //   return widget;
+  // }
+
+  // Widget _switchWidget() {
+  //   final widget = SwitchWidget(
+  //     value: _switchValue,
+  //   );
+  //   widget.tapedSwitch = ((bool value) {
+  //     print(value);
+  //   });
+
+  //   return widget;
+  // }
 }
