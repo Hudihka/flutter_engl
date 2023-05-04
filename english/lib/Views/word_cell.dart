@@ -24,71 +24,73 @@ class _WordCellState extends State<WordCell> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-        width: double.infinity,
-        child: Stack(
-          children: [
-            Align(
-              alignment: Alignment.topRight,
-              child: SizedBox(
-                height: EnumOffsets.offset50.offset(),
-                width: EnumOffsets.offset50.offset(),
-                child: IconButton(
-                  padding: EdgeInsets.all(EnumOffsets.offset13.offset()),
-                  icon: _generateImage(),
-                  iconSize: EnumOffsets.offset24.offset(),
-                  onPressed: () {
-                    widget.tapedWord(widget.word);
-                  },
-                ),
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
-                if (widget.showContent == false) {
-                  _showText = !_showText;
-                  _actionTimer();
-                  setState(() {});
-                }
-              },
-              child: Container(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: EnumOffsets.offset16.offset(),
-                      vertical: EnumOffsets.offset8.offset()),
-                  child: Column(
-                    children: [
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          // textAlign: TextAlign.left,
-                          widget.word.trans,
-                          style: TextStyleExtension.generate(
-                              size: 25, style: EnumFontStyle.bold),
-                        ),
-                      ),
-                      SizedBox(
-                        height: EnumOffsets.offset8.offset(),
-                      ),
-                      Align(
+    return GestureDetector(
+        behavior: HitTestBehavior.translucent,
+        onTap: () {
+          print("----------------------");
+          if (widget.showContent == false) {
+            _showText = !_showText;
+            _actionTimer();
+            setState(() {});
+          }
+        },
+        child: SizedBox(
+            width: double.infinity,
+            child: Stack(
+              children: [
+                Container(
+                  width: double.infinity,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: EnumOffsets.offset16.offset(),
+                        vertical: EnumOffsets.offset8.offset()),
+                    child: Column(
+                      children: [
+                        Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            textAlign: TextAlign.left,
-                            "${widget.word.form1} ${widget.word.form2} ${widget.word.form3}",
+                            // textAlign: TextAlign.left,
+                            widget.word.trans,
                             style: TextStyleExtension.generate(
-                                size: 25,
-                                style: EnumFontStyle.regular,
-                                color: widget.showContent
-                                    ? EnumColors.clear
-                                    : EnumColors.black),
-                          ))
-                    ],
+                                size: 25, style: EnumFontStyle.bold),
+                          ),
+                        ),
+                        SizedBox(
+                          height: EnumOffsets.offset8.offset(),
+                        ),
+                        Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              textAlign: TextAlign.left,
+                              "${widget.word.form1} ${widget.word.form2} ${widget.word.form3}",
+                              style: TextStyleExtension.generate(
+                                  size: 25,
+                                  style: EnumFontStyle.regular,
+                                  color: widget.showContent
+                                      ? EnumColors.clear
+                                      : EnumColors.black),
+                            ))
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            )
-          ],
-        ));
+                Align(
+                  alignment: Alignment.topRight,
+                  child: SizedBox(
+                    height: EnumOffsets.offset50.offset(),
+                    width: EnumOffsets.offset50.offset(),
+                    child: IconButton(
+                      padding: EdgeInsets.all(EnumOffsets.offset13.offset()),
+                      icon: _generateImage(),
+                      iconSize: EnumOffsets.offset24.offset(),
+                      onPressed: () {
+                        widget.tapedWord(widget.word);
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            )));
   }
 
   Image _generateImage() {
