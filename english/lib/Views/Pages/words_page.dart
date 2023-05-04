@@ -62,7 +62,7 @@ class WordsPage extends StatelessWidget {
                 ),
                 ListWords(
                   content: _listGroup,
-                  showContent: _switchValue,
+                  hideContent: _switchValue,
                 )
               ],
             ),

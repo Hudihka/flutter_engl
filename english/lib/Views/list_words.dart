@@ -11,9 +11,9 @@ import 'package:flutter/material.dart';
 
 class ListWords extends StatelessWidget {
   List<Group> content;
-  bool showContent;
+  bool hideContent;
 
-  ListWords({super.key, required this.content, required this.showContent});
+  ListWords({super.key, required this.content, required this.hideContent});
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,7 @@ class ListWords extends StatelessWidget {
     for (var word in words) {
       final cell = WordCell(
         word: word,
-        showContent: showContent,
+        hideContent: hideContent,
       );
       cell.tapedWord = (Word word) {
         SingltonsCubit.shared.getGroupCubit.tapedWord(word);

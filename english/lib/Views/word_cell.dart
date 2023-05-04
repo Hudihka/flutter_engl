@@ -8,11 +8,11 @@ import 'dart:async';
 
 class WordCell extends StatefulWidget {
   Word word;
-  bool showContent;
+  bool hideContent;
 
   late Function(Word) tapedWord;
 
-  WordCell({super.key, required this.word, required this.showContent});
+  WordCell({super.key, required this.word, required this.hideContent});
 
   @override
   _WordCellState createState() => _WordCellState();
@@ -27,8 +27,7 @@ class _WordCellState extends State<WordCell> {
     return GestureDetector(
         behavior: HitTestBehavior.translucent,
         onTap: () {
-          print("----------------------");
-          if (widget.showContent == false) {
+          if (widget.hideContent == true) {
             _showText = !_showText;
             _actionTimer();
             setState(() {});
@@ -58,18 +57,9 @@ class _WordCellState extends State<WordCell> {
                         SizedBox(
                           height: EnumOffsets.offset8.offset(),
                         ),
-                        Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              textAlign: TextAlign.left,
-                              "${widget.word.form1} ${widget.word.form2} ${widget.word.form3}",
-                              style: TextStyleExtension.generate(
-                                  size: 25,
-                                  style: EnumFontStyle.regular,
-                                  color: widget.showContent
-                                      ? EnumColors.clear
-                                      : EnumColors.black),
-                            ))
+                        widget.hideContent
+                            ? _widgetAnimate()
+                            : _widgetTranslate()
                       ],
                     ),
                   ),
@@ -115,5 +105,24 @@ class _WordCellState extends State<WordCell> {
         }
       });
     }
+  }
+
+  Widget _widgetTranslate() {
+    return Align(
+        alignment: Alignment.centerLeft,
+        child: Text(
+          textAlign: TextAlign.left,
+          "${widget.word.form1} ${widget.word.form2} ${widget.word.form3}",
+          style: TextStyleExtension.generate(
+              size: 25, style: EnumFontStyle.regular, color: EnumColors.black),
+        ));
+  }
+
+  Widget _widgetAnimate() {
+    return AnimatedOpacity(
+      opacity: _showText ? 1.0 : 0.0,
+      duration: const Duration(milliseconds: 300),
+      child: _widgetTranslate(),
+    );
   }
 }
