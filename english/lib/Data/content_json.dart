@@ -23,13 +23,13 @@ class Content {
         {"trans": "велеть", "form1": "bid", "form2": "bid", "form3": "bid"},
         {"trans": "резать", "form1": "cut", "form2": "cut", "form3": "cut"},
         {
-          "trans": "входить",
+          "trans": "вводить",
           "form1": "input",
           "form2": "input",
           "form3": "input"
         },
         {
-          "trans": "выходить",
+          "trans": "выводить",
           "form1": "output",
           "form2": "output",
           "form3": "output"
