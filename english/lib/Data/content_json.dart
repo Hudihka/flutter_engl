@@ -5,7 +5,7 @@ import 'package:english/Data/user_defaults.dart';
 import 'package:english/Data/word.dart';
 
 class Content {
-  static List<Map<String, dynamic>> _contentJSON = [
+  static final List<Map<String, dynamic>> _contentJSON = [
     {
       "number": 1,
       "description": "Все повторяются",
@@ -482,7 +482,7 @@ class Content {
     },
     {
       "number": 4,
-      "description": "EN в третей форме",
+      "description": "окончание -EN в третьей форме",
       "array": [
         {"trans": "видеть", "form1": "see", "form2": "saw", "form3": "seen"},
         {"trans": "взять", "form1": "take", "form2": "took", "form3": "taken"},
@@ -628,7 +628,7 @@ class Content {
     },
     {
       "number": 5,
-      "description": "AWN в 3 форме",
+      "description": "AWN/OWN в 3 форме",
       "array": [
         {"trans": "знать", "form1": "know", "form2": "knew", "form3": "known"},
         {
@@ -654,7 +654,7 @@ class Content {
       "number": 6,
       "description": "Все формы разные",
       "array": [
-        {"trans": "быть", "form1": "be", "form2": "was", "form3": "been"},
+        {"trans": "быть", "form1": "be", "form2": "was/were", "form3": "been"},
         {"trans": "делать", "form1": "do", "form2": "did", "form3": "done"},
         {"trans": "идти", "form1": "go", "form2": "went", "form3": "gone"},
         {
